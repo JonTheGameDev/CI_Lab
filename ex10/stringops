@@ -1,0 +1,62 @@
+(defun my-length (str)
+  (if (equal str "")
+      0
+      (+ 1 (my-length (subseq str 1))))
+)
+
+(defun my-concat (str1 str2)
+  (if (equal str1 "")
+      str2
+      (concatenate 'string
+                   (string (char str1 0))
+                   (my-concat (subseq str1 1) str2)))
+)
+
+(defun my-reverse (str)
+  (if (equal str "")
+      ""
+      (concatenate 'string
+                   (my-reverse (subseq str 1))
+                   (string (char str 0))))
+)
+
+(defun menu ()
+  (format t "~%--- String Operations Menu ---~%")
+  (format t "1. Find Length~%")
+  (format t "2. Concatenate Strings~%")
+  (format t "3. Reverse String~%")
+  (format t "4. Exit~%")
+  (format t "Enter your choice: ")
+  (setq choice (read))
+
+  (cond
+    ((= choice 1)
+     (format t "Enter string: ")
+     (setq s (read-line))
+     (format t "Length: ~a~%" (my-length s))
+     (menu))
+
+    ((= choice 2)
+     (format t "Enter first string: ")
+     (setq s1 (read-line))
+     (format t "Enter second string: ")
+     (setq s2 (read-line))
+     (format t "Concatenated: ~a~%" (my-concat s1 s2))
+     (menu))
+
+    ((= choice 3)
+     (format t "Enter string: ")
+     (setq s (read-line))
+     (format t "Reversed: ~a~%" (my-reverse s))
+     (menu))
+
+    ((= choice 4)
+     (format t "Exiting..."))
+
+    (t
+     (format t "Invalid choice! Try again.~%")
+     (menu))
+  )
+)
+
+(menu)

@@ -1,0 +1,22 @@
+(defun my-gcd (x y)
+  (if (= y 0)
+      x
+      (my-gcd y (mod x y)))
+)
+
+(defun my-lcm (x y)
+  (/ (* x y) (my-gcd x y))
+)
+
+(defun main ()
+  (format t "Enter first number: ")
+  (setq x (read))
+  
+  (format t "Enter second number: ")
+  (setq y (read))
+
+  (format t "GCD: ~a~%" (my-gcd x y))
+  (format t "LCM: ~a~%" (my-lcm x y))
+)
+
+(main)
